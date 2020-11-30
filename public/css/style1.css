@@ -1,0 +1,28 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    text-align-last: center;
+    color:white;
+}
+
+body {
+    background-color: #202020;
+}
+
+nav a {
+    display: list-item;
+    position: relative;
+    padding: 20px 20px;
+    margin: 10px;
+    list-style: none;
+    text-decoration: none;
+    font-size: large;
+}
+
+nav {
+    border:1px solid black;
+    width: 30%;
+    padding: 10px 20px;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+}

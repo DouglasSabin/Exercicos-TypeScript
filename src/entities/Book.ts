@@ -6,7 +6,7 @@ class Book extends Document {
     edition : Number;
     volume : Number;
 
-    constructor (isbn : Number, edition : Number, volume : Number, title : String, subtitle : String, publishedAt : Date | number, author : Person ) {
+    constructor (title : String, subtitle : String, publishedAt : Date | number, author : Person, isbn : Number, edition : Number, volume : Number, ) {
             super(title, subtitle, publishedAt, author)
         this.isbn = isbn;
         this.edition = edition;

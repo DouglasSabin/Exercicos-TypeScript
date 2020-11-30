@@ -12,13 +12,13 @@ const pessoa3 = new Person('Mykaely Oliveira' , new Date('2002-01-01T00:00:00') 
 const pessoa4 = new Person('Gabriel Sossai' , new Date('2002-12-02T00:00:00') , Gender.Male)
 //
 
-const book1 = new Book(1,1, 1,'Uma Breve História do Tempo', 'O jeito Warren Buffett de investir: Os segredos do maior investidor do mundo',  new Date('2009-05-08T00:00:00') , pessoa4)
+const book1 = new Book('Uma Breve História do Tempo', 'O jeito Warren Buffett de investir: Os segredos do maior investidor do mundo',  new Date('2009-05-08T00:00:00'), pessoa4, 1,1, 1)
 
-const book2 = new Book(2,2, 2,'O poder do hábito: Por que fazemos o que fazemos na vida e nos negócios', 'Mindset: A nova psicologia do sucesso eBook Kindle',  new Date('2018-08-04T00:00:00') , pessoa2)
+const book2 = new Book('O poder do hábito: Por que fazemos o que fazemos na vida e nos negócios', 'Mindset: A nova psicologia do sucesso eBook Kindle',  new Date('2018-08-04T00:00:00'), pessoa2, 2, 2, 2)
 
-const book3 = new Book(3,3, 3,'Extraordinário', 'A cinco passos de você',  new Date('2020-02-08T00:00:00') , pessoa3)
+const book3 = new Book('Extraordinário', 'A cinco passos de você',  new Date('2020-02-08T00:00:00') , pessoa3, 3,3, 3)
 
-const book4 = new Book(4,4, 4,'Gatilhos Mentais: O Guia Completo com Estratégias de Negócios e Comunicações Provadas Para Você Aplicar', 'Venda à mente, não ao cliente: Como aplicar a neurociência para negociar mais falando menos',  new Date('2020-02-08T00:00:00') , pessoa1)
+const book4 = new Book('Gatilhos Mentais: O Guia Completo com Estratégias de Negócios e Comunicações Provadas Para Você Aplicar', 'Venda à mente, não ao cliente: Como aplicar a neurociência para negociar mais falando menos',  new Date('2020-02-08T00:00:00') , pessoa1, 4,4, 4)
 //
 
 const periodical1 = new Periodical(9, 9, 9, 'Isto é', 'Veja', new Date('2010-02-18T00:00:00') , pessoa4 )

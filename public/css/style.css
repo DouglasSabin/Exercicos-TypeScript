@@ -1,0 +1,51 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    text-align-last: center;
+    color:black;
+}
+
+body {
+    background-color: #202020;
+}
+
+form {
+    border:1px solid black;
+   
+    padding: 10px 20px;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    letter-spacing: 2px;
+    font-size: 40;
+}
+
+input {
+    width: 98%;
+    list-style: none;
+    display: inline;
+    margin: 2px;
+    padding: 0px 0px;
+    text-align: center;
+}
+
+select, button {
+    width: 99%;
+    list-style: none;
+    display: inline;
+    margin: 2px;
+    padding: 0px 0px;
+    text-align: center;
+}
+
+form .inputs_doc {
+    display: none;
+}
+
+p .message {
+    display: none;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='./css/style.css'>
+</head>
+<body>
+    <form>
+        <h1>BOOKS</h1>
+
+        <select id="type" class="input">
+            <option value="" >Selecione</option>
+            <option value="l">Books</option>
+            <option value="p">Periodicos</option>
+        </select>
+
+        <input id="title"  pleceholder="Digite o Titulo do livro" class="inputs_doc">
+        <input id="subtitle" placeholder="Digite o Subtitulo do livro" class="inputs_doc">
+        <input id="publishedAt" type="date" class="inputs_doc">
+        <select id="author" placeholder="Autor" class="inputs_doc">
+            <option value="autor 1">Selecione</option>
+        </select>
+        <input id="isbn" placeholder="Digite ISBN" class="inputs_doc">
+        <input id="edition" placeholder="Edição do Livro" class="inputs_doc">
+        <input id="volume" placeholder="Volume do Livro" class="inputs_doc">
+        <input id="issn" placeholder="Codigo ISSN" class="inputs_doc">
+        <input id="issue" placeholder="issue" class="inputs_doc">
+
+        <button id="btn" class="button_doc">Salvar</button>
+        <p id="message"></p>
+    </form>
+
+    <script type="module" src="./cadastroLivros.js"></script>
+
+</body>
+</html>
