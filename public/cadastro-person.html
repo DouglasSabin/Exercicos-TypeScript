@@ -6,32 +6,30 @@
     <title>Person</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
-<body>
-    <form>
-        <h1>PESSOAS</h1>
+    <body>
+        <form>
+            <h1>PESSOAS</h1>
+                <br>
+            <input id="name" placeholder="Digite Nome e Sobrenome" autocomplete="Seu nome Completo" required>
 
-        <br>
+            <input id="birth" type="date" placeholder="Informe sua data de nascimento" required>
 
-        <input id="name" placeholder="Digite Nome e Sobrenome" autocomplete="Seu nome Completo" required>
+            <select id="gender" required>
+                
+                <option value="">Selecione o sexo</option>
+                <option value="f">Feminino</option>
+                <option value="m">Masculino</option>
 
-        <input id="birth" type="date" placeholder="Informe sua data de nascimento" required>
+            </select> 
 
-        <select id="gender" required>
-            
-          <option value="">Selecione o sexo</option>
-          <option value="f">Feminino</option>
-          <option value="m">Masculino</option>
+                <br>
 
-        </select> 
+            <button>Cadastrar</button>
+            <p id="message"></p>
+            <table id="table"></table>
+        </form>
 
-        <br>
-
-        <button>Cadastrar</button>
-
-    </form>
-
-<script type="module" src="./registro_person.js"></script>
-</body>
+    <script type="module" src="./registro_person.js"></script>
+    </body>
 </html>

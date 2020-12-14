@@ -24,6 +24,10 @@ h1 {
     font-size: 40;
 }
 
+table, table td {
+    color: white;
+}
+
 input {
     width: 98%;
     list-style: none;

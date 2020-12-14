@@ -16,6 +16,8 @@ const message = document.querySelector<HTMLParagraphElement>('#message')!
 const formulario = document.querySelector<HTMLFormElement>('form')!
 const select = document.querySelector<HTMLSelectElement>('#type')!
 const authorName = document.querySelector<HTMLSelectElement>('#authorName')!
+const table = document.querySelector<HTMLTableCaptionElement>('#table')!
+const tabela = document.querySelector<HTMLTableCaptionElement>('#tabela')!
 
 select.addEventListener('change', (ev: Event) => {
     ev.preventDefault()
@@ -39,7 +41,7 @@ select.addEventListener('change', (ev: Event) => {
         publishedAt.style.display = "block";
         author.style.display = "block";
         issue.style.display = "block";
-        issn.style.display =  'block';
+        issn.style.display = 'block';
         volume.style.display = "block";
         isbn.style.display = "none";
         edition.style.display = "none";
@@ -65,85 +67,110 @@ showPeriodicals()
 const Books: Book[] = []
 showBooks()
 
-let personLocalStorage: Array<Person> = JSON.parse(localStorage.getItem('persons')||'{}')
-let varnames = personLocalStorage.map (p=> p.name)
+let personLocalStorage: Array<Person> = JSON.parse(localStorage.getItem('persons') || '{}')
+let varnames = personLocalStorage.map(p => p.name)
 
-    formulario.addEventListener('submit', (e: Event) => {
-        e.preventDefault()
+formulario.addEventListener('submit', (e: Event) => {
+    e.preventDefault()
 
-        var person = personLocalStorage[parseInt(author.value)]
+    const capitalize = (text: string) => {
+        const words = text.split(' ')
 
-        if (!title.value.trim()) {
-            message.innerText = 'O campo Título é obrigatório!'
-            title.focus()
-            return
+        for (let i = 0; i < words.length; i++) {
+            words[i] =
+                words[i].substr(0, 1).toUpperCase() +
+                words[i].substr(1).toLowerCase()
         }
-    
-        if (!subtitle.value.trim()) {
-            message.innerText = 'O campo Subtítulo é obrigatório!'
-            title.focus()
-            return
-        }
-    
-        if (!publishedAt.value) {
-            message.innerText = 'Este campo é obrigatório!'
-            publishedAt.focus()
-            return
-        }
-    
-        const publishedDate = new Date (`^${publishedAt.value}T00:00:00`)
-    
-        if (Date.now() - Number(publishedDate) < 0) {
-            message.innerText = 'Escolha uma data do passado!'
-            publishedAt.focus()
-            return
-        }
-    
-        const authorValue = author.value.trim()
-        if (!authorValue) {
-            message.innerText = 'O campo Autor é obrigatório'
-            author.focus()
-            return
-        }
-    
-        //const regexNome = /\w+\s\w+/g
-    
-        /* if (!regexNome.test(authorValue)) {
-            message.innerText = 'Informe o nome completo do autor!'
-            author.focus()
-            return
-        } */
-    
-        if (select.value == 'l') {
+
+        return words.join(' ')
+            .replace(/ e /gi, ' e ')
+            .replace(/ da /gi, ' da ')
+            .replace(/ de /gi, ' de ')
+            .replace(/ do /gi, ' do ')
+            .replace(/ dos /gi, ' dos ')
+            .replace(/ das /gi, ' das ')
+            .replace(/ o /gi, ' o ')
+            .replace(/ as /gi, ' as ')
+            .replace(/ nos /gi, ' nos ')
+            .replace(/ nas /gi, ' nas ')
+            .replace(/ na /gi, ' na ')
+    }
+
+    const trimAll = (text: string) => text.trim().replace(/\s+/g, ' ')
+
+    var person = personLocalStorage[parseInt(author.value)]
+
+    if (!title.value.trim()) {
+        message.innerText = 'O campo Título é obrigatório!'
+        title.focus()
+        return
+    }
+
+    if (!subtitle.value.trim()) {
+        message.innerText = 'O campo Subtítulo é obrigatório!'
+        title.focus()
+        return
+    }
+
+    if (!publishedAt.value) {
+        message.innerText = 'Este campo é obrigatório!'
+        publishedAt.focus()
+        return
+    }
+
+    const publishedDate = new Date(`^${publishedAt.value}T00:00:00`)
+
+    if (Date.now() - Number(publishedDate) < 0) {
+        message.innerText = 'Escolha uma data do passado!'
+        publishedAt.focus()
+        return
+    }
+
+    const authorValue = author.value.trim()
+    if (!authorValue) {
+        message.innerText = 'O campo Autor é obrigatório'
+        author.focus()
+        return
+    }
+
+    //const regexNome = /\w+\s\w+/g
+
+    /* if (!regexNome.test(authorValue)) {
+        message.innerText = 'Informe o nome completo do autor!'
+        author.focus()
+        return
+    } */
+
+    if (select.value == 'l') {
         if (!isbn.value) {
             message.innerText = 'O campo ISBN é obrigatório'
             isbn.focus()
             return
         }
-        }
-    
-        if (!edition.value.trim()) {
-            message.innerText = 'O campo Edição é obrigatório'
-            edition.focus()
-            return
-        }
-    
-        if (!volume.value) {
-            message.innerText = 'O campo Volume é obrigatório'
-            volume.focus()
-            return
-        }
-        
-    
-        if (select.value == 'p') { 
+    }
+
+    if (!edition.value.trim()) {
+        message.innerText = 'O campo Edição é obrigatório'
+        edition.focus()
+
+    }
+
+    if (!volume.value) {
+        message.innerText = 'O campo Volume é obrigatório'
+        volume.focus()
+        return
+    }
+
+
+    if (select.value == 'p') {
         if (!issn.value) {
             message.innerText = 'O campo ISSN é obrigatório'
             issn.focus()
             return
-        } 
+        }
     }
-    
-        if (select.value == 'p') {
+
+    if (select.value == 'p') {
         if (!issue.value.trim()) {
             message.innerText = 'O campo Issue é obrigatório'
             issue.focus()
@@ -151,41 +178,41 @@ let varnames = personLocalStorage.map (p=> p.name)
         }
     }
     message.innerText = 'Seu cadastro foi realizado com sucesso!'
-    
+
     if (select.value == 'l') {
-    try {
-        let publishDate = new Date (publishedAt.value)
-        let newISBN : Number = +isbn.value
-        let newEdition : Number = +edition.value
-        let newVolume : Number = +volume.value
-        const book = new Book(title.value, subtitle.value, publishDate, person, newISBN, newEdition, newVolume)
-        Books.push(book)
-        localStorage.setItem('Books', JSON.stringify(Books))
-        showBooks()
-    }
-    catch (error: any){
-        message.innerText = 'Algo de errado não está certo!'
-        return
-    }
-    message.innerText = 'Seu cadastro foi realizado com sucesso!'
+        try {
+            let publishDate = new Date(publishedAt.value)
+            let newISBN: Number = +isbn.value
+            let newEdition: Number = +edition.value
+            let newVolume: Number = +volume.value
+            const book = new Book(capitalize(trimAll(title.value)), subtitle.value, publishDate, person, newISBN, newEdition, newVolume)
+            Books.push(book)
+            localStorage.setItem('Books', JSON.stringify(Books))
+            showBooks()
+        }
+        catch (error: any) {
+            message.innerText = 'Algo de errado não está certo!'
+            return
+        }
+        message.innerText = 'Seu cadastro foi realizado com sucesso!'
     }
 
     if (select.value == 'p') {
-    try {
-        let publishDate = new Date (publishedAt.value)
-        let newISSN : number = +issn.value
-        let newVolume : number = +volume.value
-        let newIssue : number = + issue.value
-        const periodical = new Periodical(newISSN, newVolume, newIssue, title.value, subtitle.value, publishDate, person)
+        try {
+            let publishDate = new Date(publishedAt.value)
+            let newISSN: number = +issn.value
+            let newVolume: number = +volume.value
+            let newIssue: number = + issue.value
+            const periodical = new Periodical(newISSN, newVolume, newIssue, title.value, subtitle.value, publishDate, person)
 
-        Periodicals.push(periodical)
-        localStorage.setItem('Periodicals', JSON.stringify(Periodicals))
-        showPeriodicals()
-    } catch (error: any) {
-        message.innerText = 'Algo de errado não está certo!'
-        return
-    }
-    message.innerText = 'Seu cadastro foi realizado com sucesso!'
+            Periodicals.push(periodical)
+            localStorage.setItem('Periodicals', JSON.stringify(Periodicals))
+            showPeriodicals()
+        } catch (error: any) {
+            message.innerText = 'Algo de errado não está certo!'
+            return
+        }
+        message.innerText = 'Seu cadastro foi realizado com sucesso!'
     }
 
 })
@@ -201,7 +228,6 @@ function showBooks() {
         }
     }
 }
-
 function showPeriodicals() {
     if (localStorage.getItem('Periodicals')) {
         const data = JSON.parse(localStorage.getItem('Periodicals')!)
@@ -213,9 +239,66 @@ function showPeriodicals() {
         }
     }
 }
-
 function pullNames() {
-    for (let i = 0; i < varnames.length;i++) {
+    for (let i = 0; i < varnames.length; i++) {
         author.add(new Option(varnames[i].toString(), i.toString()))
     }
 }
+
+let bookLocalStorage: Array<Book> = JSON.parse(localStorage.getItem('Books') || '{}')
+let vartitle = bookLocalStorage.map(p => p.title)
+let varpublishedAt = bookLocalStorage.map(p => p.publishedAt)
+
+let sortTitle = [...vartitle].sort()
+
+let lines = ' '
+
+for (let i = 0; i < sortTitle.length; i++) {
+    lines += `
+        <tr>
+        <td>${sortTitle[i]}</td>
+        <td>${varpublishedAt[i]}</td>
+        </tr>
+        `
+}
+
+table.style.display = 'block'
+table.innerHTML = `
+  <thread>
+    <tr> 
+        Livros: 
+    </tr>
+    
+  </thread>
+  <tbody>
+    ${lines}
+  </tbody>
+            `
+
+let periodicalsLocalStorage: Array<Periodical> = JSON.parse(localStorage.getItem('Periodicals') || '{}')
+let periodicalTitle = periodicalsLocalStorage.map(p => p.title)
+let sortPeriodicals = [...periodicalTitle].sort()
+
+let linesPeriodicals = ' '
+
+for (let i = 0; i < sortPeriodicals.length; i++) {
+    linesPeriodicals += `
+            <tr>
+            <td>${sortPeriodicals[i]}</td>
+            </tr>
+                    `
+}
+
+tabela.style.display = 'block'
+tabela.innerHTML = `
+        <thread>
+        <tr> 
+        Periodicals: 
+        </tr>
+                
+        </thread>
+        <tbody>
+        ${linesPeriodicals}
+        </tbody>
+        `
+export default Person 
